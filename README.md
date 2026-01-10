@@ -59,4 +59,4 @@ DeepRAG/
 ⚠️ 注意事项
 本项目默认使用 Qwen/Qwen2-1.5B-Instruct 作为基座模型。
 微调过程中显存占用约为 4GB-5GB。
-Windows 用户请务必使用 WSL2 运行，原生 Windows 可能存在 bitsandbytes兼容性问题。
+Windows 用户请务必使用 WSL2 运行，原生 Windows 可能存在 bitsandbytes 兼容性问题。
