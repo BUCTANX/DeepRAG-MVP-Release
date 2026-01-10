@@ -31,6 +31,7 @@ conda activate deeprag
 Bashpip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 \
   --index-url https://download.pytorch.org/whl/cu118
 Bashpip install -r requirements.txt
+```
 3. 启动项目
 Bash# 推荐：允许局域网内其他设备访问
 streamlit run app.py --server.address=0.0.0.0
