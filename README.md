@@ -29,7 +29,7 @@ DeepRAG 是一个**端到端**的垂直领域大模型定制工具。
 # 创建并激活虚拟环境
 conda create -n deeprag python=3.10 -y
 conda activate deeprag
-
+```
 # 安装 PyTorch（以 CUDA 11.8 为例，根据实际情况调整）
 pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 \
   --index-url https://download.pytorch.org/whl/cu118
@@ -37,10 +37,14 @@ pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 \
 # 安装项目依赖
 pip install -r requirements.txt
 3. 启动项目
+```
 Bashstreamlit run app.py --server.address=0.0.0.0
+```
 # 或仅本地访问
 # streamlit run app.py
+
 启动后，浏览器访问显示的地址（默认：http://localhost:8501）
+
 📖 使用流程
 
 上传领域文档
@@ -65,6 +69,7 @@ textDeepRAG/
 ├── models/                # LoRA 适配器保存目录
 ├── requirements.txt
 └── README.md
+```
 ⚠️ 重要注意事项
 
 默认基座模型：Qwen/Qwen2-1.5B-Instruct
