@@ -31,19 +31,22 @@ conda activate deeprag
 Bashpip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 \
   --index-url https://download.pytorch.org/whl/cu118
 Bashpip install -r requirements.txt
-```
+
 3. 启动项目
+
 Bash# 推荐：允许局域网内其他设备访问
 streamlit run app.py --server.address=0.0.0.0
 
 # 或者仅本地访问
 # streamlit run app.py
 启动后浏览器访问：http://localhost:8501（或你机器的内网 IP:8501）
+
 📖 使用流程
 
 在左侧边栏上传你的 PDF 领域文档
 点击「开始自动化微调」按钮，耐心等待完成
 训练完成后，直接在右侧对话框开始提问
+
 
 注：首次运行会自动从 HuggingFace 下载 Qwen2-1.5B-Instruct 模型
 🗂 项目目录结构
