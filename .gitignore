@@ -1,0 +1,23 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 环境变量 (防止 key 泄露)
+.env
+
+# 数据与模型 (太大了，不传)
+data/uploads/*
+!data/uploads/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+models/*
+!models/.gitkeep
+
+# 临时文件
+*.log
+.DS_Store
+
+# 虚拟环境 (如果有人把 env 建在项目里)
+venv/
+env/
+.venv/
