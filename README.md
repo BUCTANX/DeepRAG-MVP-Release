@@ -29,7 +29,7 @@ bash
 conda create -n deeprag python=3.10
 conda activate deeprag
 
-# 安装 PyTorch (根据你的 CUDA 版本调整，这里以 11.8 为例)
+## 安装 PyTorch (根据你的 CUDA 版本调整，这里以 11.8 为例)
 pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
 
 # 安装项目依赖
@@ -38,6 +38,7 @@ pip install -r requirements.txt
 Bash
 
 streamlit run app.py --server.address=localhost
+
 启动后，访问浏览器显示的地址（通常是 http://localhost:8501）。
 
 📖 使用流程
