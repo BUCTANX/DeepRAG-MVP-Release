@@ -25,7 +25,7 @@ DeepRAG 是一个端到端的垂直领域大模型构建工具。它允许用户
 
 强烈建议使用 Conda 创建独立环境：
 
-```bash
+bash
 conda create -n deeprag python=3.10
 conda activate deeprag
 
@@ -34,7 +34,7 @@ pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https
 
 # 安装项目依赖
 pip install -r requirements.txt
-3. 运行项目
+### 3. 运行项目
 Bash
 
 streamlit run app.py --server.address=localhost
