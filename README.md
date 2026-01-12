@@ -1,70 +1,96 @@
-# 🧠 DeepRAG：基于 RAG + LoRA 的私有领域大模型构建平台
+# 🧠 DeepRAG: 你的专属垂直领域 AI 助手构建器
 
-DeepRAG 是一个**端到端**的垂直领域大模型定制工具。  
-用户只需上传私有文档（PDF），即可自动完成数据清洗、指令微调（LoRA），最终得到一个同时具备**领域知识（RAG）**与**领域适应性（Fine-tuning）**的专属智能助手。
+
+> 上传 PDF -> 自动微调 -> 拥有一个懂你业务的专属 AI
+
+DeepRAG 是一个“开箱即用”的工具，它能帮你把私有的 PDF 文档（如医疗指南、法律条文、员工手册）变成一个聪明的 AI 对话助手。
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
-![CUDA](https://img.shields.io/badge/CUDA-11.8%2B-green)
 ![GPU](https://img.shields.io/badge/GPU-RTX3060%2B-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## ✨ 核心特性
+---
 
-- 全自动微调流水线：上传 PDF → 自动生成高质量 QA 数据 → 一键 LoRA 微调
-- 极低资源需求：4-bit 量化训练，RTX 3060 (6GB) 即可微调 Qwen2-1.5B
-- RAG + Fine-tuning 双引擎：大幅降低幻觉率，提升领域问题回答精准度
-- 所见即所得 Web 界面：基于 Streamlit，操作简单直观
+## 🖥️ 我能用它做什么？
 
-## 🛠️ 快速开始
+1.  **上传文档**：比如上传一份《糖尿病饮食指南.pdf》。
+2.  **一键学习**：点击“自动化微调”，AI 会自己阅读文档并进行自我训练（LoRA 微调）。
+3.  **精准问答**：训练好后，你问它“糖尿病人能吃西瓜吗？”，它会根据文档精准回答，而不是胡说八道。
 
-### 1. 环境要求
+---
 
-- 操作系统：Linux（推荐 Ubuntu 20.04+ 或 WSL2）
-- 显卡：NVIDIA GPU（显存 ≥ 6GB）
-- Python：3.10+
-- CUDA：11.8+
+## 🚀 极速部署 (3分钟上手)
 
-### 2. 安装依赖（推荐使用 Conda）
+### 前置要求
+*   **电脑配置**：需要一张 NVIDIA 显卡（显存 6GB 以上，推荐 RTX 3060 及以上）。
+*   **系统**：推荐使用 **Windows + WSL2** 或 **Linux**。
+*   **基础软件**：请确保已安装 [Miniconda](https://docs.anaconda.com/miniconda/) 或 Anaconda。
 
+### 步骤 1: 下载代码
+点击右上角的绿色按钮 **Code -> Download ZIP**，解压到一个文件夹。
+或者使用 Git：
 ```bash
-conda create -n deeprag python=3.10 -y
+git clone https://github.com/BUCTANX/DeepRAG-MVP-Release.git
+cd DeepRAG-MVP-Release
+步骤 2: 一键启动 (推荐 🔥)
+我们提供了一个自动化脚本，帮你完成所有复杂的环境配置。
+
+在终端（Terminal）中运行：
+
+Bash
+
+chmod +x start.sh  # 赋予执行权限 (仅第一次需要)
+./start.sh
+脚本会自动执行以下操作：
+
+创建名为 deeprag_env 的虚拟环境。
+自动安装 PyTorch 和所有 AI 依赖库。
+启动网页界面。
+步骤 3: 开始使用
+当终端显示 Network URL: http://localhost:8501 时，打开浏览器访问该地址即可。
+
+📖 手动安装指南 (如果你不想用脚本)
+如果你是开发者，也可以手动一步步安装：
+
+创建环境
+
+Bash
+
+conda create -n deeprag python=3.10
 conda activate deeprag
-Bashpip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 \
-  --index-url https://download.pytorch.org/whl/cu118
-Bashpip install -r requirements.txt
+安装 PyTorch (关键)
 
-3. 启动项目
+Bash
 
-Bash# 推荐：允许局域网内其他设备访问
-streamlit run app.py --server.address=0.0.0.0
+pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 --index-url https://download.pytorch.org/whl/cu118
+安装依赖
 
-# 或者仅本地访问
-# streamlit run app.py
-启动后浏览器访问：http://localhost:8501（或你机器的内网 IP:8501）
+Bash
 
-📖 使用流程
+pip install -r requirements.txt
+运行
 
-在左侧边栏上传你的 PDF 领域文档
-点击「开始自动化微调」按钮，耐心等待完成
-训练完成后，直接在右侧对话框开始提问
+Bash
 
+streamlit run app.py --server.address=localhost
+❓ 常见问题 (Q&A)
+Q: 第一次运行为什么这么慢？
+A: 首次运行时，程序需要从 HuggingFace 下载 Qwen2-1.5B 模型（约 3GB）和 Embedding 模型。请耐心等待，保持网络通畅。
 
-注：首次运行会自动从 HuggingFace 下载 Qwen2-1.5B-Instruct 模型
-🗂 项目目录结构
-textDeepRAG/
-├── app.py                 # Streamlit WebUI 主程序
-├── core/
-│   ├── data_processor.py  # PDF解析 + 清洗 + 指令数据生成
-│   ├── trainer.py         # LoRA 微调（基于 TRL）
-│   └── rag_engine.py      # RAG 检索与融合逻辑
-├── data/                  # 原始文档 & 处理后的中间数据
-├── models/                # 训练好的 LoRA 适配器存放处
-├── requirements.txt
-└── README.md
-⚠️ 重要提醒
+Q: 显存不足 (OOM) 怎么办？
+A: 本项目默认开启 4-bit 量化，最低支持 6GB 显存。如果依然报错，请尝试关闭其他占用显存的程序。
 
-默认基座模型：Qwen/Qwen2-1.5B-Instruct
-微调显存峰值：约 4.2～5.1GB（4-bit 量化）
-Windows 用户强烈建议使用 WSL2
-建议训练前关闭其他显存占用程序
+Q: Windows 用户可以直接运行吗？
+A: 由于核心依赖库 bitsandbytes 对 Windows 支持不佳，强烈建议在 WSL2 (Ubuntu) 下运行。在原生 Windows PowerShell 下运行可能会报错。
 
-祝你快速打造出专属的领域智能助手！ 🚀
+📂 目录结构说明
+text
+
+DeepRAG/
+├── app.py                 # 网页主程序 (Streamlit)
+├── start.sh               # 一键启动脚本
+├── core/                  # AI 核心算法代码
+│   ├── trainer.py         # 负责模型微调
+│   └── rag_engine.py      # 负责问答推理
+├── data/                  # 存放你的数据
+└── models/                # 存放训练好的模型
